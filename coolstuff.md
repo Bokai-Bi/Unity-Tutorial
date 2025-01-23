@@ -3,12 +3,12 @@
 
 ## Index
 [Philosophical Points](#philosophical-points)  
-Basic Unity Concepts  
+[Basic Unity Concepts](#basic-unity-concepts)  
 Basic Scripting  
 Advanced Scripting  
 
 # Philosophical Points
-Getting ideas right is more important than technical knowledge
+> Getting ideas right is more important than technical knowledge
 - Video games are usually **simple in algorithms but complex in implementation**. Games contain many objects that interact with each other in specific ways, resulting in large amounts of interdependent logic for any large enough project. 
 - A good programmer manages the complexity by **abstracting at the correct level**, **reducing redundant code** and **making the code more understandable**. 
   - Please do not overly abstract. **Premature abstraction is the root of all software evils**.
@@ -18,6 +18,7 @@ Getting ideas right is more important than technical knowledge
   - Anecdotally, in-editor tools like Github Copilot works much better than simply asking CharGPT in the browser, as it provides the AI with more context (which gamedev is heavily dependent upon).
 
 # Basic Unity Concepts
+> That's a LOT of concepts
 Short FAQ:
 - What Unity version should I use?
   - Usually I recommend using the newest, but if you work in a team make sure everyone has the same version.
@@ -112,7 +113,46 @@ The platform is way too big. To fix this, go back to the Scene tab and make it a
 Now, let's add a player character. In the hierarchy, right click and add a 2D Object -> Sprites -> Triangle, name it "Player". Note that this is **completely** equivalent to creating an empty object, adding a SpriteRenderer, then making it render a triangle sprite.  
 ![image](https://github.com/user-attachments/assets/94251cee-b28d-4c61-842f-7c7021c4499e)  
 
+If you click on the Play button on the top of the window, you'll see that... nothing happens. This is because the only components we've given our objects are SpriteRenderers - they render sprites, but nothing more.  
+To fix this, let's give our player character physics simulation. Let's add a Rigidbody2D component to the Player object.  
+![image](https://github.com/user-attachments/assets/e9a13104-c57b-4abc-857b-cf557d44af44)  
+That's a lot of fields! We don't have to worry about them for now.
+<details><summary>I want to know more about how each of the fields in Rigidbody2D works!</summary>
+Recall the philosophy section - you should search it up online, it's a good skill :)  
+  
+![Buy a man eat fish, He day, Teach fish man To a lifetime](https://github.com/user-attachments/assets/8ca4b6f5-aacf-4620-8fa0-b0a8803416fc)
+</details>  
 
+Now click the play button again. What happens?  
+The player fell through the platform. The Rigidbody2D subjected the player to gravity, but neither the player nor the platform has a collider. To make the player stand on the platform, add a BoxCollider2D component to both objects.
 
+Click play again, now the player correctly stands on the platform!
+![image](https://github.com/user-attachments/assets/df960c60-c7cf-41f2-8d1f-402243a5dc92)
 
+# Basic Scripting
+> This is cute and all, but I thought we’re doing coding?  
 
+Unity only comes with so many built-in components. Sometimes you want something slightly different from a built-in component, other times what you want isn’t included at all! It’s time to write your own components (yay!)
+
+## Concept: A custom component (aka “script”) is a developer-written C# class that inherits from MonoBehavior.
+- Don't worry about what MonoBehavior means - in short, it marks a class as a Unity component that can be attached to GameObjects.
+- You can attach it to GameObjects to give them custom behavior you designed via code.
+- Most C# ideas (control flow like `if` and `for`, data structures like `List`s) work normally. We will focus on Unity-specific mechanisms.
+- This is your chance to write arbitrary code - let your imagination run wild! 
+
+Going back to our "platformer" example. We now want to allow the player to control the player character object. There are a lot of ways to achieve player movement, and Unity can't provide them all. Let's therefore write our own player control component.  
+Attach a new component to the player object, type in "PlayerMovement", and click "New Script". Once you have created the new script, open it from the Assets tab to start editing.  
+
+![image](https://github.com/user-attachments/assets/e756f8ab-882a-46f0-9be5-38e321c402b0)  
+This is how the file should look like (I'm using Visual Studio Code, which I also recommend for beginners). Let's break this down.
+- The class PlayerMovement derives from MonoBehavior. This class is the component that is attached to GameObjects.
+  - You can declare additional classes in the file, for example if you need a custom data structure. Those classes will not be part of the component.
+- The functions `Start` and `Update` are special Unity functions that are called by the engine at specific points (see image). 
+- You are free to add additional helper functions and member variables to the class. Your helper functions will not be automatically called by Unity.
+
+Now, I'll give you the building blocks you need to implement movement. Try to do it yourself before checking my solution!
+<details markdown="1">
+  <summary>Unity API</summary>
+- `gameObject` - the name `gameObject` is a variable of type `GameObject` that refers to the GameObject the script is attached to.
+- `GetComponent<T>()` - A member function of the `GameObject` class that returns the component T attached to the GameObject that the member function is called on. In plain words, `gameObject.GetComponent<Transform>()` will give a reference to the `Transform` component on the current GameObject.
+</details>
