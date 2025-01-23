@@ -84,6 +84,12 @@ A GameObject is the fundamental building block of your scenes. The following are
 - Particle effect generator
 - Or anything in the game, really
 
+We are going to make a rudimentary "platformer" today. Let's first try to create an object to be our platform. You can right click in the hierarchy and click "Create Empty", name the object "platform".  
+![image](https://github.com/user-attachments/assets/4531db4f-d77f-439d-b98e-a0f75bdfcc1c)  
+If you select the object and look in the Scene tab, you should see... nothing.  
+![image](https://github.com/user-attachments/assets/48625f06-e7c9-4428-b3f6-22b4acab0d47)  
+Why is that?
+
 A GameObject, by itself, does not do anything. It has no appearance, no behavior, no interaction with other objects, nothing. Technically, all GameObjects come with a transform (position, rotation, and scale). However, a transform doesn’t mean anything when the object has no behavior.  
 ## Concept: A GameObject can have an arbitrary amount of components. Components are solely responsible for all behaviors of GameObject. 
 The following are common components:
@@ -93,5 +99,20 @@ The following are common components:
 - Animator: Animates objects by changing arbitrary properties of components over time
 - Camera: The camera! The game will not render if there is no object with a camera component attached in the scene.
 - Tilemap: A 2D tilemap. ~~My biggest enemy~~
+
+Let's make our platform visible by adding the "sprite renderer" component. Select the object, then click "Add Component" in the Inspector tab. Search for "Sprite Renderer" and add it.  
+![image](https://github.com/user-attachments/assets/7e71d28b-ced6-403c-be8e-b134f1f90631)
+You just added a Sprite Renderer to your object, but it doesn't know what sprite to render. Let's add a sprite to it. Here I'm using an image I grabbed from Wikipedia.  
+![Ameiurus_melas_by_Duane_Raver](https://github.com/user-attachments/assets/3616b011-2b0c-4e37-ac88-e7ce4af44bfe)
+Drag the image into the Assets tab in the bottom to import it as a sprite asset. You can now drag the asset to the Sprite slot in the SpriteRenderer component.  
+![image](https://github.com/user-attachments/assets/93a2174f-26dc-4043-a964-bfa3bf5218ad)  
+The platform arrives! You can click the Game tab (right of the Scene tab) to see how it looks in-game.  
+![image](https://github.com/user-attachments/assets/c5ef1c9c-2545-4aaf-8cb7-869d5c82db34)  
+The platform is way too big. To fix this, go back to the Scene tab and make it a proper platform by using the transform tools or by changing the numbers in the transform component of the platform (try both!).  
+Now, let's add a player character. In the hierarchy, right click and add a 2D Object -> Sprites -> Triangle, name it "Player". Note that this is **completely** equivalent to creating an empty object, adding a SpriteRenderer, then making it render a triangle sprite.  
+![image](https://github.com/user-attachments/assets/94251cee-b28d-4c61-842f-7c7021c4499e)  
+
+
+
 
 
