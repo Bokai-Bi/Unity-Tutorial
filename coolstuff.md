@@ -140,7 +140,7 @@ Unity only comes with so many built-in components. Sometimes you want something 
 - Most C# ideas (control flow like `if` and `for`, data structures like `List`s) work normally. We will focus on Unity-specific mechanisms.
 - This is your chance to write arbitrary code - let your imagination run wild! 
 
-Going back to our "platformer" example. We now want to allow the player to control the player character object. There are a lot of ways to achieve player movement, and Unity can't provide them all. Let's therefore write our own player control component.  
+Going back to our "platformer" example. We now want to allow the player to control the player character object horizontally. There are a lot of ways to achieve player movement, and Unity can't provide them all. Let's therefore write our own player control component.  
 Attach a new component to the player object, type in "PlayerMovement", and click "New Script". Once you have created the new script, open it from the Assets tab to start editing.  
 
 ![image](https://github.com/user-attachments/assets/e756f8ab-882a-46f0-9be5-38e321c402b0)  
@@ -151,8 +151,20 @@ This is how the file should look like (I'm using Visual Studio Code, which I als
 - You are free to add additional helper functions and member variables to the class. Your helper functions will not be automatically called by Unity.
 
 Now, I'll give you the building blocks you need to implement movement. Try to do it yourself before checking my solution!
-<details markdown="1">
-  <summary>Unity API</summary>
-- `gameObject` - the name `gameObject` is a variable of type `GameObject` that refers to the GameObject the script is attached to.
-- `GetComponent<T>()` - A member function of the `GameObject` class that returns the component T attached to the GameObject that the member function is called on. In plain words, `gameObject.GetComponent<Transform>()` will give a reference to the `Transform` component on the current GameObject.
+<details>
+  <summary>Unity API</summary>  
+  
+  - `gameObject` - the name `gameObject` is a variable of type `GameObject` that refers to the GameObject the script is attached to.
+  - `GetComponent<T>()` - A member function of the `GameObject` class that returns the component T attached to the GameObject that the member function is called on. In plain words, `gameObject.GetComponent<Transform>()` will give a reference to the `Transform` component on the current GameObject.
+  - `transform.position` - A `Vector3` that represents the position of a transform. Editing individual fields is not allowed, but reassignment is okay. E.g. `transform.position.x += 1;` will not compile, but `transform.position += new Vector3(1,0,0);` is valid.
+  - `Time.deltaTime` - A float value that represents how many seconds have past since the last frame. (Why is this important?)
+  - `Input.GetKey(keycode)` - Returns a boolean on whether the key with `keycode` is pressed in the current moment. Keycodes are generally in the format of `KeyCode.W` for the W key, when unsure check Unity documentation.
+</details>
+
+<details>
+  <summary>Reference Answer</summary>
+
+  ![image](https://github.com/user-attachments/assets/f8dcf2fd-f356-48b5-9d3d-ba1de70666c1)
+
+  On every frame, we check whether A/D 
 </details>
