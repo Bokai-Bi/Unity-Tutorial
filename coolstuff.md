@@ -166,5 +166,5 @@ Now, I'll give you the building blocks you need to implement movement. Try to do
 
   ![image](https://github.com/user-attachments/assets/f8dcf2fd-f356-48b5-9d3d-ba1de70666c1)
 
-  On every frame, we check whether A/D 
+  On every frame, we check whether A/D is pressed. If so, we increment the position by 
 </details>
