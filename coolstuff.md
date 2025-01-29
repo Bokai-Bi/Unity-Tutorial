@@ -19,6 +19,7 @@ Advanced Scripting
 
 # Basic Unity Concepts
 > That's a LOT of concepts
+
 Short FAQ:
 - What Unity version should I use?
   - Usually I recommend using the newest, but if you work in a team make sure everyone has the same version.
