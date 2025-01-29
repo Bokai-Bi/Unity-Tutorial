@@ -4,8 +4,8 @@
 ## Index
 [Philosophical Points](#philosophical-points)  
 [Basic Unity Concepts](#basic-unity-concepts)  
-Basic Scripting  
-Advanced Scripting  
+[Basic Scripting](#basic-scripting)  
+[Advanced Scripting](#advanced-scripting)  
 
 # Philosophical Points
 > Getting ideas right is more important than technical knowledge
@@ -202,3 +202,76 @@ Recommended Exercises:
 - Declare an in-editor editable GameObject variable inside `PlayerMovement` and drag an object from the hierarchy into the field in the Unity editor. You now have a reference to an in-scene GameObject in your script. Try to do fun things with it in your code! (try `Instantiate` and `Destroy`, be careful about putting things directly in `Update` if you don't want it to execute every frame).
 
 In the last step of this guide I want you to create an obstacle that deletes the player GameObject upon contact. Following the spirit of this guide, you'll be figuring out yourself how to do it using things we learned thus far and your favorite search engine for whatever you don't know how to do. Have fun!
+
+# Advanced Scripting
+> When you're too deep into the rabbit hole
+
+This is a bonus section - a bunch of useful tools that would be helpful as you find your current tools insufficient. We'll only go into their general purpose here, for more detail please consult the documentation.
+<details>
+  <summary>Coroutines</summary>
+  
+  A coroutine is a separate, concurrently running "thread". Suppose you want to do x every frame for 10 seconds, then do y once and wait for 5 seconds, then finally for 20 seconds do z every 1.5 seconds. You can achieve this through a lot of conditionals in `Update`, but a more performant and readable approach would be to use Coroutines.  
+  ```
+# declare the coroutine
+IEnumerator doStuff() {
+  float startTime = Time.time; 
+  while (Time.time < startTime + 10) {
+    x();
+    yield return null; # pause execution of coroutine, then resume next frame
+  }
+  y();
+  yield return new WaitForSeconds(5); # pause execution for 5 seconds
+  startTime = Time.time;
+  while (Time.time < startTime + 20) {
+    z();
+    yield return new WaitForSeconds(1.5f);
+  }
+}
+# some driver code {
+  StartCoroutine(doStuff());
+}
+```
+</details>
+<details>
+  <summary>Global Static State</summary>
+
+  What if you want to store some data that persist through scene changes and can be accessed from anywhere in the game (e.g. settings)? One possible way to do this is through the `static` keyword. When you declare a variable as `static`, the variable belongs to the class rather than specific instances of the class. This means that its value persists through scenes and can also be accessed from the class name alone. Here's an example:  
+  ```
+# inside Settings.cs
+public static int volume; # this can be read and write from anywhere else using Settings.volume.
+```  
+Note that in order to access a variable from other classes, it must be `public`. When not specified, C# variables default to `private`  
+Another thing static variables are used for is to provide a reference to a sole-instance. For example, if you know only one GameObject will ever have the `Player` component, you can provide an easily accessible reference to the player object by doing this:  
+```
+# inside Player.cs
+public static Player player;
+void Start() {
+  player = this;
+}
+```  
+Upon initialization, the player would set the static class variable `player` to itself. Now, any other class can easily access the player by the name `Player.player`.
+</details>
+
+<details>
+  <summary>Interfaces</summary>
+  
+  Suppose you have 50 different kinds of enemies, each with their own class. You want to write some code that can do something (e.g. deal damage) to any enemy. How would you do it? One way to do this is through interfaces. An interface is a specification that provides some number of functions. A class is said to implement the interface if it implements all functions specified by the interface. 
+  ```
+  # inside IEnemy.cs
+  public interface IEnemy {
+    public void TakeDamage(float damage);
+    public string getName();
+  }
+
+  # inside each of your enemy scripts
+  public class EnemyType1 : MonoBehavior, IEnemy { # specifies that EnemyType1 implements IEnemy
+    public void TakeDamage(float damage) {...}
+    public string getName() {...} # A class must implement all functions specified by its interfaces
+  }
+
+  # inside some code elsewhere
+  public void DealDamage(IEnemy enemy, float amount) {
+    enemy.TakeDamage(amount); # any class that implements IEnemy can be passed in as enemy here.
+  }
+  ```
+</details>
