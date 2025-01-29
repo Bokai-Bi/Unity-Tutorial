@@ -166,5 +166,38 @@ Now, I'll give you the building blocks you need to implement movement. Try to do
 
   ![image](https://github.com/user-attachments/assets/f8dcf2fd-f356-48b5-9d3d-ba1de70666c1)
 
-  On every frame, we check whether A/D is pressed. If so, we increment the position by 
+  On every frame, we check whether A/D is pressed. If so, we increment the position on the x-axis by a variable `speed`. You will notice that we are multiplying by a value `Time.deltaTime`, which gives the amount of seconds since the last frame. Why is this necessary? Let's consider a case without it. `Update()` is called once a frame. Suppose we do simply do `transform.position += new Vector3(speed,0,0)`, the player will be moved speed\*60 units to the right on a computer running the game at 60 frames per second, while only moving speed\*30 units to the right on a computer running 30fps. In fact, if a computer fluctuates its framerate, your player will be moving at a variable speed. Think about how multiplying by `Time.deltaTime` removes the effect of framerates.
 </details>
+
+<details>
+  <summary>Exercise on deltaTime</summary>
+
+  Which one of the following needs to be adjusted by deltaTime?
+  - Enlarging an object by a constant rate in `Update()`
+    - Yes
+  - Smoothly moving an arrow from one UI element to another 
+    - Yes
+  - Teleporting an object from one place to another
+    - No
+      
+</details>
+
+Now, your player should move correctly on the platform! But our job is not over yet. Making a good game involves a lot of numerical tweaking to improve player experience. Right now, if you want to change the player speed, you'll have to change it in the script and re-compile. To make the process quicker, declare the `speed` variable either as `public float speed` or `[SerializeField] float speed`. You should now see this field you can edit in the editor.  
+![image](https://github.com/user-attachments/assets/8ad833ed-3bb7-4015-bf76-f32dabe8abef)  
+<details>
+  <summary>What's the advantage of making fields editable in editor?</summary>  
+
+  - You get to change values faster without having to edit code and recompile.
+  - You can have multiple instances of the same component that give different behavior.
+    - For example, you can write a component `rangedEnemy.cs` and make `int health`, `float speed`, `float damage`, and `GameObject projectile` editable fields in the editor. Then, you can attach the same component to multiple enemies and have them behave differently depending on the fields, instead of having to write multiple scripts. 
+</details>  
+<details>
+  <summary>What is a SerializeField?</summary>  
+  Unity makes all public variables editable in the editor. If you want to make a private variable editable, you'll need to mark it [SerializeField]. 
+</details>
+
+Recommended Exercises:
+- Try to make another GameObject with the `PlayerMovement` component in the scene and give it a different speed in editor. How does it work?
+- Declare an in-editor editable GameObject variable inside `PlayerMovement` and drag an object from the hierarchy into the field in the Unity editor. You now have a reference to an in-scene GameObject in your script. Try to do fun things with it in your code! (try `Instantiate` and `Destroy`, be careful about putting things directly in `Update` if you don't want it to execute every frame).
+
+In the last step of this guide I want you to create an obstacle that deletes the player GameObject upon contact. Following the spirit of this guide, you'll be figuring out yourself how to do it using things we learned thus far and your favorite search engine for whatever you don't know how to do. Have fun!
