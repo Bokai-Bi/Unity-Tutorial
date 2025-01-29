@@ -42,7 +42,7 @@ Let’s get started:
 
 Let's create a new project from Unity Hub after installing a Unity editor version:
 ![image](https://github.com/user-attachments/assets/5854486e-0945-4ca6-ac67-e59666dab762)
-This will take a while. Want to follow along? You can kill some time by watching me shill cool things in the collapsed section below (or just browser your phone I guess).
+This will take a while. Want to follow along? You can kill some time by watching me shill cool things in the collapsed section below (or just browse your phone I guess).
 <details>
   <summary>Fun & Joy</summary>  
   
