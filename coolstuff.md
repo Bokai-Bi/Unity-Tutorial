@@ -77,30 +77,28 @@ Project created? You should be greeted with a screen like this:
 It's a lot of stuff! Let's focus on one section at a time. This is the **scene hierarchy**. It displays all the GameObjects in the current scene.  
 ![image](https://github.com/user-attachments/assets/5cb8cdf7-68b0-41c0-827a-317d018a9f6e)
 
-## Concept: A scene is a hierarchy (tree) of GameObjects.
+## Concept: A scene is a collection of GameObjects.
 A GameObject is the fundamental building block of your scenes. Everything in your game is made up of one or more GameObjects:
 - Player character
 - Enemies
 - Game environment
-- UI Button
-- Particle effect generator
-- Or anything in the game, really
+- UI Buttons
+- Anything in the game, really
 
-We are going to make a rudimentary "platformer" today. Let's first try to create an object to be our platform. You can right click in the hierarchy and click "Create Empty", name the object "platform".  
+A GameObject, by itself, is an empty container that does not do anything. All GameObjects come with a transform (position, rotation, and scale). However, a transform doesn’t mean anything when the object has no behavior.  
+We are going to make a basic "platformer" today. Let's first try to create an object to be our platform. You can right click in the hierarchy and click "Create Empty", name the object "platform".  
 ![image](https://github.com/user-attachments/assets/4531db4f-d77f-439d-b98e-a0f75bdfcc1c)  
 If you select the object and look in the Scene tab, you should see... nothing.  
 ![image](https://github.com/user-attachments/assets/48625f06-e7c9-4428-b3f6-22b4acab0d47)  
-Why is that?
+This makes sense since an empty GameObject has no behavior. To make it show a platform, we can add a new component to it.
 
-A GameObject, by itself, does not do anything. It has no appearance, no behavior, no interaction with other objects, nothing. Technically, all GameObjects come with a transform (position, rotation, and scale). However, a transform doesn’t mean anything when the object has no behavior.  
 ## Concept: A GameObject can have an arbitrary amount of components. Components are solely responsible for all behaviors of a GameObject. 
 The following are common components:
 - SpriteRenderer: Renders a sprite (image) where the object is.
-- BoxCollider2D: A collider to either enable collision or collision detection (trigger)
+- BoxCollider2D: A collider for collision
 - Rigidbody2D: Gives an object physics simulation.
-- Animator: Animates objects by changing arbitrary properties of components over time
+- Animator: Animates objects by changing properties of components over time
 - Camera: The camera! The game will not render if there is no object with a camera component attached in the scene.
-- Tilemap: A 2D tilemap. ~~My biggest enemy~~
 
 Let's make our platform visible by adding the "sprite renderer" component. Select the object, then click "Add Component" in the Inspector tab. Search for "Sprite Renderer" and add it.  
 ![image](https://github.com/user-attachments/assets/7e71d28b-ced6-403c-be8e-b134f1f90631)  
