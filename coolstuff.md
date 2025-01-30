@@ -85,7 +85,7 @@ A GameObject is the fundamental building block of your scenes. Everything in you
 - UI Buttons
 - Anything in the game, really
 
-A GameObject, by itself, is an empty container that does not do anything. All GameObjects come with a transform (position, rotation, and scale). However, a transform doesn’t mean anything when the object has no behavior.  
+A GameObject, by itself, is an empty container that only has a transform (position, rotation, and scale). It has no behavior otherwise.
 We are going to make a basic "platformer" today. Let's first try to create an object to be our platform. You can right click in the hierarchy and click "Create Empty", name the object "platform".  
 ![image](https://github.com/user-attachments/assets/4531db4f-d77f-439d-b98e-a0f75bdfcc1c)  
 If you select the object and look in the Scene tab, you should see... nothing.  
