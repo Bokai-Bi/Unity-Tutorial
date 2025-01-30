@@ -1,4 +1,4 @@
-# A Comprehensive Unity Tutorial
+# A Conceptual Tutorial to Unity
 ### By Bokai Bi, Discord @KoishiHat
 
 ## Index
@@ -7,15 +7,17 @@
 [Basic Scripting](#basic-scripting)  
 [Advanced Scripting](#advanced-scripting)  
 
+This tutorial focuses on a foundational understanding of how Unity works rather than knowledge on how to do specific things, which from experience is often what beginners lack.
+
 # Philosophical Points
 > Getting ideas right is more important than technical knowledge
-- Video games are usually **simple in algorithms but complex in implementation**. Games contain many objects that interact with each other in specific ways, resulting in large amounts of interdependent logic for any large enough project. 
+- Video games are usually **simple in algorithms but complex in implementation**. Games contain many objects that interact with each other in specific ways, resulting in large amounts of interdependent logic for any large enough project. This **will** be different from programming you've done in the past.
 - A good programmer manages the complexity by **abstracting at the correct level**, **reducing redundant code** and **making the code more understandable**. 
   - Please do not overly abstract. **Premature abstraction is the root of all software evils**.
-- Programming in Unity, like dealing with any complex API, involves a large amount of **searching things up and referencing the Unity documentation**. Your first step whenever encountering something you don’t know should be **searching online**.
-  - Small caveat, I recommend **against** overly relying on “how to do x in Unity” videos. Searching the documentation and trying to put the pieces together will help you improve quickly, while mechanically copying videos online can also result in inappropriate mixing of implementation approaches.
-- AI can make development a lot easier, but is **heavily recommended against** for inexperienced developers. If you do want to use AI, make sure you fully understand the code you’re using. 
-  - Anecdotally, in-editor tools like Github Copilot works much better than simply asking CharGPT in the browser, as it provides the AI with more context (which gamedev is heavily dependent upon).
+- Programming in Unity, like dealing with any complex API, involves a large amount of **searching things up and referencing the Unity documentation**. Your first step whenever encountering anything you don’t know should be **searching online**.
+  - Small caveat, I recommend **against** overly relying on “how to do x in Unity” videos. Searching the documentation and trying to put the pieces together will not only help you improve quickly, but also allow you to customize your solution for your specific usecase.
+- AI can make development a lot faster, but is **heavily recommended against** for inexperienced developers. If you do want to use AI, make sure you fully understand the code you’re using. 
+  - Anecdotally, in-editor tools like Github Copilot works much, much better than simply asking CharGPT in the browser, as it provides the AI with more context (which gamedev is heavily dependent upon).
 
 # Basic Unity Concepts
 > That's a LOT of concepts
@@ -26,15 +28,14 @@ Short FAQ:
 - What license should I get?
   - Personal is completely sufficient. Apply for a student plan if you can and want, but it’s not necessary at all (I’d even say it’s not worth your time).
 - What’s the difference between Unity 2D and 3D?
-  - Unity is fundamentally a 3D engine - Unity2D is just Unity3D ignoring the z-axis. In this guide, we will use Unity2D as its simplicity allows us to illustrate concepts more clearly  
+  - Unity is fundamentally a 3D engine - Unity2D is just Unity3D ignoring the z-axis. In this guide, we will use Unity2D as its simplicity allows us to illustrate concepts more clearly.  
 
-In this tutorial, I will try to introduce concepts first, and then show concrete examples to illustrate them. You're encouraged to follow along on your own device as it allows you to experiment.  
+In this tutorial, I will try to introduce concepts first, and then show concrete examples to illustrate them. You're heavily encouraged to follow along on your own device as it allows you to experiment.  
 Let’s get started:
 
 ## Concept: A Unity game is made up of Scenes.
-- Every moment in a Unity game happens some scene
-- You can load scenes additively on top of the current scene, but you can ignore this until needed.
-- A scene is a unit of gameplay. The following are common scenes:
+- Every moment in a Unity game happens in some scene.
+- A scene is a distinct unit of gameplay. The following are common scenes:
   - Title screen
   - Credits
   - Levels
@@ -47,7 +48,9 @@ This will take a while. Want to follow along? You can kill some time by watching
   <summary>Fun & Joy</summary>  
   
   Catfish  
-  ![fish-catfish](https://github.com/user-attachments/assets/07d2f3f8-b917-4cc0-8162-f1ca9c0ca90d)
+  ![fish-catfish](https://github.com/user-attachments/assets/07d2f3f8-b917-4cc0-8162-f1ca9c0ca90d)  
+
+  [My anime list](https://myanimelist.net/profile/KoishiHat)  
 
   [Check out our indie Touhou doujin game Evernight](https://www.instagram.com/evernight_devteam)
 
@@ -55,7 +58,7 @@ This will take a while. Want to follow along? You can kill some time by watching
   - Touhou Project (the greatest video game series of all time you should check it out)
   - Baba is You
   - Balatro
-  - [Flip of Light (by our great composer at Team Evernight)](https://store.steampowered.com/app/2015460/Flip_of_Light/)
+  - [Flip of Light (very cool platformer)](https://store.steampowered.com/app/2015460/Flip_of_Light/)
   - Ib
   - Outer Wilds
   - Omori
@@ -63,9 +66,6 @@ This will take a while. Want to follow along? You can kill some time by watching
   - Yume Nikki
 
   [My best Beat Saber play](https://www.twitch.tv/videos/2196824993)
-
-  
-  [My anime list](https://myanimelist.net/profile/KoishiHat)
 
   Catfish  
   ![catfish-world-yuri-grisendi](https://github.com/user-attachments/assets/443032b9-b45d-42d4-9be0-491c441815c4)
@@ -78,7 +78,7 @@ It's a lot of stuff! Let's focus on one section at a time. This is the **scene h
 ![image](https://github.com/user-attachments/assets/5cb8cdf7-68b0-41c0-827a-317d018a9f6e)
 
 ## Concept: A scene is a hierarchy (tree) of GameObjects.
-A GameObject is the fundamental building block of your scenes. The following are all GameObjects (or groups of them):
+A GameObject is the fundamental building block of your scenes. Everything in your game is made up of one or more GameObjects:
 - Player character
 - Enemies
 - Game environment
@@ -93,7 +93,7 @@ If you select the object and look in the Scene tab, you should see... nothing.
 Why is that?
 
 A GameObject, by itself, does not do anything. It has no appearance, no behavior, no interaction with other objects, nothing. Technically, all GameObjects come with a transform (position, rotation, and scale). However, a transform doesn’t mean anything when the object has no behavior.  
-## Concept: A GameObject can have an arbitrary amount of components. Components are solely responsible for all behaviors of GameObject. 
+## Concept: A GameObject can have an arbitrary amount of components. Components are solely responsible for all behaviors of a GameObject. 
 The following are common components:
 - SpriteRenderer: Renders a sprite (image) where the object is.
 - BoxCollider2D: A collider to either enable collision or collision detection (trigger)
@@ -106,11 +106,13 @@ Let's make our platform visible by adding the "sprite renderer" component. Selec
 ![image](https://github.com/user-attachments/assets/7e71d28b-ced6-403c-be8e-b134f1f90631)
 You just added a Sprite Renderer to your object, but it doesn't know what sprite to render. Let's add a sprite to it. Here I'm using an image I grabbed from Wikipedia.  
 ![Ameiurus_melas_by_Duane_Raver](https://github.com/user-attachments/assets/3616b011-2b0c-4e37-ac88-e7ce4af44bfe)
-Drag the image into the Assets tab in the bottom to import it as a sprite asset. You can now drag the asset to the Sprite slot in the SpriteRenderer component.  
+Drag the image into the Assets tab in the bottom to import it into Unity as a sprite asset. You can now drag the asset to the Sprite slot in the SpriteRenderer component.  
 ![image](https://github.com/user-attachments/assets/93a2174f-26dc-4043-a964-bfa3bf5218ad)  
 The platform arrives! You can click the Game tab (right of the Scene tab) to see how it looks in-game.  
 ![image](https://github.com/user-attachments/assets/c5ef1c9c-2545-4aaf-8cb7-869d5c82db34)  
 The platform is way too big. To fix this, go back to the Scene tab and make it a proper platform by using the transform tools or by changing the numbers in the transform component of the platform (try both!).  
+![image](https://github.com/user-attachments/assets/ba4ab3e8-5e6f-40bc-9918-fc61a651fd5b)(These are the transform tools)
+
 Now, let's add a player character. In the hierarchy, right click and add a 2D Object -> Sprites -> Triangle, name it "Player". Note that this is **completely** equivalent to creating an empty object, adding a SpriteRenderer, then making it render a triangle sprite.  
 ![image](https://github.com/user-attachments/assets/94251cee-b28d-4c61-842f-7c7021c4499e)  
 
@@ -212,24 +214,25 @@ This is a bonus section - a bunch of useful tools that would be helpful as you f
   
   A coroutine is a separate, concurrently running "thread". Suppose you want to do x every frame for 10 seconds, then do y once and wait for 5 seconds, then finally for 20 seconds do z every 1.5 seconds. You can achieve this through a lot of conditionals in `Update`, but a more performant and readable approach would be to use Coroutines.  
   ```
-# declare the coroutine
-IEnumerator doStuff() {
-  float startTime = Time.time; 
-  while (Time.time < startTime + 10) {
-    x();
-    yield return null; # pause execution of coroutine, then resume next frame
+  # declare the coroutine
+  IEnumerator doStuff(string arg1) {
+    Debug.Log(arg1); # coroutines can take arguments too!
+    float startTime = Time.time; 
+    while (Time.time < startTime + 10) {
+      x();
+      yield return null; # pause execution of coroutine, then resume next frame
+    }
+    y();
+    yield return new WaitForSeconds(5); # pause execution for 5 seconds
+    startTime = Time.time;
+    while (Time.time < startTime + 20) {
+      z();
+      yield return new WaitForSeconds(1.5f);
+    }
   }
-  y();
-  yield return new WaitForSeconds(5); # pause execution for 5 seconds
-  startTime = Time.time;
-  while (Time.time < startTime + 20) {
-    z();
-    yield return new WaitForSeconds(1.5f);
+  void SomeDriver() { 
+    StartCoroutine(doStuff("HI")); # a driver starts the coroutine using StartCoroutine
   }
-}
-# some driver code {
-  StartCoroutine(doStuff());
-}
 ```
 </details>
 <details>
