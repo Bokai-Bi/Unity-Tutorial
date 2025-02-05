@@ -7,7 +7,7 @@
 [Basic Scripting](#basic-scripting)  
 [Advanced Scripting](#advanced-scripting)  
 
-This tutorial focuses on a foundational understanding of how Unity works rather than knowledge on how to do specific things, which from experience is often what beginners lack.
+This tutorial focuses on a foundational understanding of how Unity works rather than knowledge on how to do specific things, which from experience is often what beginners lack. This will be comparatively dense and read more like a textbook. For a more gentle introduction, check out [this](https://www.youtube.com/watch?v=XtQMytORBmM) video.
 
 # Philosophical Points
 > Getting ideas right is more important than technical knowledge
@@ -15,7 +15,7 @@ This tutorial focuses on a foundational understanding of how Unity works rather 
 - A good programmer manages the complexity by **abstracting at the correct level**, **reducing redundant code** and **making the code more understandable**. 
   - Please do not overly abstract. **Premature abstraction is the root of all software evils**.
 - Programming in Unity, like dealing with any complex API, involves a large amount of **searching things up and referencing the Unity documentation**. Your first step whenever encountering anything you don’t know should be **searching online**.
-  - Small caveat, I recommend **against** overly relying on “how to do x in Unity” videos. Searching the documentation and trying to put the pieces together will not only help you improve quickly, but also allow you to customize your solution for your specific usecase.
+  - Small caveat, I recommend **against** overly relying on “how to do x in Unity” videos. Searching the documentation and trying to put the pieces together will not only help you improve quickly, but also allow you to customize your solution for your specific usecase. When you watch those videos, try to make sure you understand why things are done the way they are.
 - AI can make development a lot faster, but is **heavily recommended against** for inexperienced developers. If you do want to use AI, make sure you fully understand the code you’re using. 
   - Anecdotally, in-editor tools like Github Copilot works much, much better than simply asking CharGPT in the browser, as it provides the AI with more context (which gamedev is heavily dependent upon).
 
