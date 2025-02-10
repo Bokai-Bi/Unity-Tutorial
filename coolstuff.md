@@ -12,7 +12,7 @@ This tutorial focuses on a foundational understanding of how Unity works rather 
 # Philosophical Points
 > Getting ideas right is more important than technical knowledge
 - Video games are usually **simple in algorithms but complex in implementation**. Games contain many objects that interact with each other in specific ways, resulting in large amounts of interdependent logic for any large enough project. This **will** be different from programming you've done in the past.
-- A good programmer manages the complexity by **abstracting at the correct level**, **reducing redundant code** and **making the code more understandable**. 
+- A good game programmer manages the complexity by **abstracting at the correct level**, **reducing redundant code** and **making the code more understandable**. 
   - Please do not overly abstract. **Premature abstraction is the root of all software evils**.
 - Programming in Unity, like dealing with any complex API, involves a large amount of **searching things up and referencing the Unity documentation**. Your first step whenever encountering anything you don’t know should be **searching online**.
   - Small caveat, I recommend **against** overly relying on “how to do x in Unity” videos. Searching the documentation and trying to put the pieces together will not only help you improve quickly, but also allow you to customize your solution for your specific usecase. When you watch those videos, try to make sure you understand why things are done the way they are.
